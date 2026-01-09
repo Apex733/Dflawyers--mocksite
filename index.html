@@ -43,6 +43,14 @@
             background-position: center;
             background-attachment: fixed;
         }
+        
+        /* Fix for iOS mobile devices where fixed backgrounds can jitter */
+        @media (hover: none) {
+            .hero-pattern {
+                background-attachment: scroll;
+            }
+        }
+
         .fade-up {
             opacity: 0;
             transform: translateY(30px);
@@ -52,6 +60,13 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Image fade at bottom */
+        .mask-image-bottom {
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
@@ -103,40 +118,41 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="lg:hidden text-brand-navy focus:outline-none">
+                <button id="mobile-menu-btn" class="lg:hidden text-brand-navy focus:outline-none p-2" aria-label="Toggle Menu">
                     <i class="fas fa-bars text-3xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl transition-all duration-300 ease-in-out">
             <div class="flex flex-col px-6 py-4 space-y-4">
-                <a href="#home" class="text-slate-800 font-semibold border-b border-gray-100 pb-2">Home</a>
-                <a href="#about" class="text-slate-800 font-semibold border-b border-gray-100 pb-2">About Us</a>
-                <a href="#services" class="text-slate-800 font-semibold border-b border-gray-100 pb-2">Services</a>
-                <a href="#contact" class="bg-brand-navy text-white text-center py-3 rounded-lg font-bold">Call Now: 0431 666 741</a>
+                <a href="#home" class="mobile-link text-slate-800 font-semibold border-b border-gray-100 pb-2">Home</a>
+                <a href="#about" class="mobile-link text-slate-800 font-semibold border-b border-gray-100 pb-2">About Us</a>
+                <a href="#services" class="mobile-link text-slate-800 font-semibold border-b border-gray-100 pb-2">Services</a>
+                <a href="#testimonials" class="mobile-link text-slate-800 font-semibold border-b border-gray-100 pb-2">Reviews</a>
+                <a href="#contact" class="mobile-link bg-brand-navy text-white text-center py-3 rounded-lg font-bold">Call Now: 0431 666 741</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero-pattern min-h-[90vh] flex items-center relative">
-        <div class="container mx-auto px-6 py-20 relative z-10">
+        <div class="container mx-auto px-6 py-16 md:py-20 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Text Content -->
-                <div class="text-white space-y-6 fade-up">
+                <div class="text-white space-y-6 fade-up text-center lg:text-left order-2 lg:order-1">
                     <div class="inline-block bg-brand-gold text-brand-navy font-bold px-4 py-1 rounded-full text-sm uppercase tracking-wider mb-2">
                         25+ Years Experience
                     </div>
-                    <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                    <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
                         Former Police Prosecutors <br>
                         <span class="text-brand-blue">Fighting For You.</span>
                     </h1>
-                    <p class="text-xl text-gray-200 leading-relaxed max-w-lg">
+                    <p class="text-lg md:text-xl text-gray-200 leading-relaxed max-w-lg mx-auto lg:mx-0">
                         We know how the police think because we used to be them. Secure the best possible outcome for your criminal or traffic matter with insider expertise.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
                         <a href="tel:0431666741" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold text-center hover:bg-blue-600 transition shadow-lg flex items-center justify-center gap-2">
                             <i class="fas fa-phone-alt"></i> 0431 666 741
                         </a>
@@ -146,20 +162,20 @@
                     </div>
                 </div>
 
-                <!-- Floating Card / Image -->
-                <div class="hidden lg:block relative fade-up" style="transition-delay: 200ms;">
+                <!-- Floating Card / Image - Now Visible on Mobile -->
+                <div class="block relative fade-up mt-8 lg:mt-0 order-1 lg:order-2" style="transition-delay: 200ms;">
                     <!-- Lawyer Image Cutout Effect -->
-                     <img src="https://dflawyers.com.au/wp-content/uploads/2025/12/davis_banner-749x1024.png" alt="Principal Lawyer" class="w-full max-w-md mx-auto drop-shadow-2xl relative z-20 mask-image-bottom">
+                     <img src="https://dflawyers.com.au/wp-content/uploads/2025/12/davis_banner-749x1024.png" alt="Principal Lawyer" class="w-4/5 md:w-full max-w-md mx-auto drop-shadow-2xl relative z-20 mask-image-bottom">
                      
                      <!-- Trust Badge -->
-                     <div class="absolute bottom-10 -left-10 bg-white p-6 rounded-xl shadow-2xl z-30 max-w-xs border-l-4 border-brand-gold">
+                     <div class="absolute bottom-4 -left-2 lg:bottom-10 lg:-left-10 bg-white p-4 lg:p-6 rounded-xl shadow-2xl z-30 max-w-[15rem] lg:max-w-xs border-l-4 border-brand-gold">
                          <div class="flex items-center gap-3 mb-2">
-                             <div class="bg-brand-navy text-white w-10 h-10 rounded-full flex items-center justify-center">
+                             <div class="bg-brand-navy text-white w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-sm lg:text-base">
                                  <i class="fas fa-shield-alt"></i>
                              </div>
-                             <p class="font-bold text-brand-navy">Ex-Chief Inspector</p>
+                             <p class="font-bold text-brand-navy text-sm lg:text-base">Ex-Chief Inspector</p>
                          </div>
-                         <p class="text-sm text-gray-600">Our Principal has served as a police officer for 25 years, attaining the senior rank of Chief Inspector.</p>
+                         <p class="text-xs lg:text-sm text-gray-600">Our Principal has served as a police officer for 25 years.</p>
                      </div>
                 </div>
             </div>
@@ -167,25 +183,25 @@
         
         <!-- Wave Separator -->
         <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-            <svg class="relative block w-[calc(100%+1.3px)] h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[40px] md:h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
             </svg>
         </div>
     </section>
 
     <!-- Authority/About Section -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-16 md:py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="lg:w-1/2 relative fade-up">
-                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-brand-gold/20 rounded-full blur-xl"></div>
-                    <img src="https://dflawyers.com.au/wp-content/uploads/2025/12/about-6.jpg" alt="Court Room" class="rounded-2xl shadow-2xl relative z-10 w-full object-cover h-[400px]">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                <div class="w-full lg:w-1/2 relative fade-up">
+                    <div class="hidden lg:block absolute -top-4 -left-4 w-24 h-24 bg-brand-gold/20 rounded-full blur-xl"></div>
+                    <img src="https://dflawyers.com.au/wp-content/uploads/2025/12/about-6.jpg" alt="Court Room" class="rounded-2xl shadow-2xl relative z-10 w-full object-cover h-64 md:h-[400px]">
                     <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-brand-navy rounded-2xl z-0 hidden lg:block"></div>
                 </div>
-                <div class="lg:w-1/2 fade-up" style="transition-delay: 100ms;">
-                    <h3 class="text-brand-blue font-bold tracking-widest uppercase mb-2">About Us</h3>
-                    <h2 class="font-serif text-4xl font-bold text-brand-navy mb-6">We Don't Just Know The Law. <br>We Know The System.</h2>
-                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                <div class="w-full lg:w-1/2 fade-up" style="transition-delay: 100ms;">
+                    <h3 class="text-brand-blue font-bold tracking-widest uppercase mb-2 text-sm md:text-base">About Us</h3>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-navy mb-6">We Don't Just Know The Law. <br>We Know The System.</h2>
+                    <p class="text-slate-600 mb-6 text-base md:text-lg leading-relaxed">
                         With nearly three decades of experience in the criminal justice system, our firm is uniquely equipped to navigate complex legal situations. 
                     </p>
                     <p class="text-slate-600 mb-8 leading-relaxed">
@@ -216,14 +232,14 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-brand-light">
+    <section id="services" class="py-16 md:py-20 bg-brand-light">
         <div class="container mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16 fade-up">
-                <h2 class="font-serif text-4xl font-bold text-brand-navy mb-4">Our Practice Areas</h2>
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 fade-up">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-navy mb-4">Our Practice Areas</h2>
                 <p class="text-slate-600">We specialise in providing expert assistance to individuals facing legal issues across the Sydney Metropolitan and Blue Mountains areas.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Card 1 -->
                 <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border-t-4 border-brand-blue fade-up">
                     <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-brand-blue text-2xl">
@@ -290,22 +306,22 @@
     <!-- Urgent CTA Strip -->
     <div class="bg-brand-navy py-12">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
                 <div>
                     <h3 class="text-2xl md:text-3xl font-bold text-white">Arrested? Police wanting to interview you?</h3>
                     <p class="text-brand-blue mt-2">Do not speak to the police until you have spoken to us.</p>
                 </div>
-                <a href="tel:0431666741" class="bg-brand-gold text-brand-navy px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition shadow-lg animate-pulse">
-                    Call Immediately: 0431 666 741
+                <a href="tel:0431666741" class="bg-brand-gold text-brand-navy px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition shadow-lg animate-pulse whitespace-nowrap">
+                    Call 0431 666 741
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="py-20 bg-white">
+    <section id="testimonials" class="py-16 md:py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="font-serif text-4xl font-bold text-brand-navy mb-12 text-center fade-up">Client Success Stories</h2>
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-navy mb-12 text-center fade-up">Client Success Stories</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Review 1 -->
@@ -357,11 +373,11 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-brand-light">
+    <section id="contact" class="py-16 md:py-20 bg-brand-light">
         <div class="container mx-auto px-6">
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
                 <!-- Info Side -->
-                <div class="lg:w-5/12 bg-brand-navy text-white p-12 flex flex-col justify-between">
+                <div class="lg:w-5/12 bg-brand-navy text-white p-8 md:p-12 flex flex-col justify-between">
                     <div>
                         <h2 class="font-serif text-3xl font-bold mb-6">Get A Free Case Assessment</h2>
                         <p class="text-blue-200 mb-8">Contact us today to arrange a consultation. We offer fixed fees and honest advice.</p>
@@ -405,7 +421,7 @@
                 </div>
 
                 <!-- Form Side -->
-                <div class="lg:w-7/12 p-12">
+                <div class="lg:w-7/12 p-8 md:p-12">
                     <form onsubmit="event.preventDefault(); alert('Thank you. A lawyer will contact you shortly.');">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
@@ -529,9 +545,17 @@
         // Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
         });
 
         // Scroll Animation Observer
